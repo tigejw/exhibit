@@ -1,8 +1,7 @@
-export default function SearchBar({ setQuery, query, setSearchTrigger }) {
+export default function SearchBar({ setQuery, query, onSearch }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("1")
-    setSearchTrigger(true)
+    onSearch();
   };
 
   return (
