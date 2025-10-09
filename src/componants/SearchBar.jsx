@@ -32,7 +32,7 @@ export default function SearchBar({
     setPage(page + 1);
     onSearch();
   };
-
+  
   return (
     <>
       <form onSubmit={handleSubmit}>

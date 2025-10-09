@@ -1,21 +1,22 @@
 export default function SearchResults({ results }) {
-
   if (!results.length) {
     return <p>No results found</p>;
   }
+
   return (
-    <ul>
+    <div className="results-grid-container">
       {results.map((artwork) => (
-        <li key={artwork.objectID}>
-          <img
-            src={artwork.primaryImageSmall}
-            alt={artwork.title}
-            width={100}
-          />
-          <div>{artwork.title}</div>
-          <div>{artwork.artistDisplayName}</div>
-        </li>
+        <div className="result-card" key={artwork.objectID}>
+          <div className="result-image-container">
+            <img
+              src={artwork.primaryImageSmall}
+              alt={artwork.title || "Artwork image"}
+            />
+          </div>
+          <div className="result-title">{artwork.title}</div>
+          <div className="result-artist">{artwork.artistDisplayName}</div>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }

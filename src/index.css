@@ -1,0 +1,47 @@
+.results-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  min-height: 60vh;
+}
+
+.result-card {
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-start;
+}
+
+.result-image-container {
+  width: 100%;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.result-card img {
+  width: 100%;
+  height: 80%;
+  display: block;
+}
+
+.result-title,
+.result-artist {
+  text-align: center;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .results-grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .results-grid-container {
+    grid-template-columns: 1fr;
+  }
+}
