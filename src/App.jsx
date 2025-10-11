@@ -69,7 +69,7 @@ function App() {
             <SearchResultsPage results={results} searchProps={searchProps} />
           }
         />
-        <Route path="/artwork/:artworkId" element={<ArtworkViewPage />} />
+        <Route path="/artwork/:artworkId" element={<ArtworkViewPage searchProps={searchProps} results={results} />} />
         <Route path="/exhibit/:exhibitId" element={<ExhibitViewPage />} />
       </Routes>
     </Router>
