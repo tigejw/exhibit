@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export default function SearchResults({ results }) {
+  const navigate = useNavigate();
+
   if (!results.length) {
     return <p>No results found</p>;
   }
@@ -6,7 +10,11 @@ export default function SearchResults({ results }) {
   return (
     <div className="results-grid-container">
       {results.map((artwork) => (
-        <div className="result-card" key={artwork.objectID}>
+        <button
+          className="result-card"
+          key={artwork.objectID || artwork.artwork_id}
+          onClick={() => navigate(`/artwork/${artwork.objectID || artwork.artwork_id}`)}
+        >
           <div className="result-image-container">
             <img
               src={artwork.primaryImageSmall}
@@ -15,7 +23,7 @@ export default function SearchResults({ results }) {
           </div>
           <div className="result-title">{artwork.title}</div>
           <div className="result-artist">{artwork.artistDisplayName}</div>
-        </div>
+        </button>
       ))}
     </div>
   );

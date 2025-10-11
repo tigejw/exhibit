@@ -1,25 +1,32 @@
+import { useNavigate } from "react-router-dom";
 export default function SearchBar({
-  query,
-  setQuery,
-  source,
-  setSource,
-  onDisplay,
-  setOnDisplay,
-  department,
-  setDepartment,
-  sortBy,
-  setSortBy,
-  order,
-  setOrder,
-  limit,
-  setLimit,
-  page,
-  setPage,
-  onSearch,
+  searchProps
 }) {
+  const navigate = useNavigate();
+  console.log(searchProps)
+  const {
+    query,
+    setQuery,
+    source,
+    setSource,
+    onDisplay,
+    setOnDisplay,
+    department,
+    setDepartment,
+    sortBy,
+    setSortBy,
+    order,
+    setOrder,
+    limit,
+    setLimit,
+    page,
+    setPage,
+    onSearch
+  } = searchProps;
   const handleSubmit = (e) => {
     e.preventDefault();
     onSearch();
+    navigate("/search");
   };
   const handlePrevPage = () => {
     if (page > 1) {

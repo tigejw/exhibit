@@ -1,7 +1,12 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/Home";
+import SearchResultsPage from "./pages/SearchResults";
+import ArtworkViewPage from "./pages/Artwork";
+import ExhibitViewPage from "./pages/Exhibit";
 import { useState } from "react";
-import SearchBar from "./componants/SearchBar";
+import SearchBar from "./components/SearchBar";
 import axios from "axios";
-import SearchResults from "./componants/searchResults";
+import SearchResults from "./components/searchResults";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -12,8 +17,8 @@ function App() {
   const [order, setOrder] = useState("");
   const [limit, setLimit] = useState("");
   const [page, setPage] = useState(1);
-
   const [results, setResults] = useState([]);
+  const [exhibits, setExhibits] = useState([]);
 
   const handleSearch = async () => {
     const params = new URLSearchParams();
@@ -32,29 +37,42 @@ function App() {
     setResults(res.data.artworksData);
   };
 
+  const searchProps = {
+    query,
+    setQuery,
+    source,
+    setSource,
+    onDisplay,
+    setOnDisplay,
+    department,
+    setDepartment,
+    sortBy,
+    setSortBy,
+    order,
+    setOrder,
+    limit,
+    setLimit,
+    page,
+    setPage,
+    onSearch: handleSearch,
+  };
   return (
-    <>
-      <SearchBar
-        query={query}
-        setQuery={setQuery}
-        source={source}
-        setSource={setSource}
-        onDisplay={onDisplay}
-        setOnDisplay={setOnDisplay}
-        department={department}
-        setDepartment={setDepartment}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-        order={order}
-        setOrder={setOrder}
-        limit={limit}
-        setLimit={setLimit}
-        page={page}
-        setPage={setPage}
-        onSearch={handleSearch}
-      />
-      <SearchResults results={results} />
-    </>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={<HomePage searchProps={searchProps} exhibits={exhibits} />}
+        />
+        <Route
+          path="/search"
+          element={
+            <SearchResultsPage results={results} searchProps={searchProps} />
+          }
+        />
+        <Route path="/artwork/:artworkId" element={<ArtworkViewPage />} />
+        <Route path="/exhibit/:exhibitId" element={<ExhibitViewPage />} />
+      </Routes>
+    </Router>
   );
 }
 
