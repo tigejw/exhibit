@@ -3,10 +3,8 @@ import HomePage from "./pages/Home";
 import SearchResultsPage from "./pages/SearchResults";
 import ArtworkViewPage from "./pages/Artwork";
 import ExhibitViewPage from "./pages/Exhibit";
-import { useState } from "react";
-import SearchBar from "./components/SearchBar";
+import { useEffect, useState } from "react";;
 import axios from "axios";
-import SearchResults from "./components/searchResults";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -18,8 +16,20 @@ function App() {
   const [limit, setLimit] = useState("");
   const [page, setPage] = useState(1);
   const [results, setResults] = useState([]);
+
   const [exhibits, setExhibits] = useState([]);
 
+  useEffect(()=>{
+    axios.get("http://localhost:9090/exhibits")
+    .then((res)=>{
+      setExhibits(res.data.exhibits);
+    })
+    .catch((err)=>{
+      console.error("exhibits error:", err);
+    })
+  },[])
+
+  
   const handleSearch = async () => {
     const params = new URLSearchParams();
     if (query) params.append("q", query);
@@ -88,4 +98,11 @@ error handling
 artwork component with full image and details
 links to museum page
 where can you view
+
+// 
+exhibits showcased in home page.
+view exhibit page with list of artworks 
+exhibit creation
+add artwork to exhibit from artwork view page + maybe search results.
+css and design
 */
