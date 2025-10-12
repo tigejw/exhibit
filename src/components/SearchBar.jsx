@@ -3,7 +3,6 @@ export default function SearchBar({
   searchProps
 }) {
   const navigate = useNavigate();
-  console.log(searchProps)
   const {
     query,
     setQuery,

@@ -23,10 +23,10 @@ export default function ArtworkViewPage({ searchProps }) {
 
   if (loading) return <p>Loading...</p>;
   if (!artwork) return <p>Artwork not found.</p>;
-
+  console.log(artwork);
   return (
     <>
-          <Header searchProps={searchProps} />
+      <Header searchProps={searchProps} />
       <div className="artwork-view-container">
         <div className="artwork-image-section">
           <img
@@ -38,15 +38,34 @@ export default function ArtworkViewPage({ searchProps }) {
           <div className="artwork-artist">{artwork.artistDisplayName}</div>
         </div>
         <div className="artwork-info-section">
-          <p><strong>Source:</strong> {artwork.source}</p>
-          <p><strong>isPublicDomain:</strong> {artwork.isPublicDomain ? "Yes" : "No"}</p>
-          <p><strong>Department:</strong> {artwork.museumDepartment}</p>
-          <p><strong>Artist Bio:</strong> {artwork.artistDisplayBio}</p>
-          <p><strong>Nationality:</strong> {artwork.artistNationality}</p>
-          <p><strong>Date:</strong> {artwork.objectDate}</p>
-          <p><strong>Medium:</strong> {artwork.medium}</p>
-          <p><strong>Dimensions:</strong> {artwork.dimensions}</p>
-          <p><strong>On View:</strong> {artwork.isOnView ? "Yes" : "No"}</p>
+          <p>
+            <strong>Source:</strong> {artwork.source}
+          </p>
+          <p>
+            <strong>isPublicDomain:</strong>{" "}
+            {artwork.isPublicDomain ? "Yes" : "No"}
+          </p>
+          <p>
+            <strong>Department:</strong> {artwork.museumDepartment}
+          </p>
+          <p>
+            <strong>Artist Bio:</strong> {artwork.artistDisplayBio}
+          </p>
+          <p>
+            <strong>Nationality:</strong> {artwork.artistNationality}
+          </p>
+          <p>
+            <strong>Date:</strong> {artwork.objectDate}
+          </p>
+          <p>
+            <strong>Medium:</strong> {artwork.medium}
+          </p>
+          <p>
+            <strong>Dimensions:</strong> {artwork.dimensions}
+          </p>
+          <p>
+            <strong>On View:</strong> {artwork.isOnView ? "Yes" : "No"}
+          </p>
         </div>
       </div>
     </>
