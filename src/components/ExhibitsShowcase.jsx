@@ -4,9 +4,14 @@ export default function ExhibitShowcase({ exhibits }) {
   if (!exhibits || exhibits.length === 0) {
     return <p>No exhibits found.</p>;
   }
+
+  const sortedExhibits = [...exhibits].sort(
+    (a, b) => new Date(b.date_created) - new Date(a.date_created)
+  ).reverse();
+
   return (
     <div className="results-grid-container">
-      {exhibits.map((exhibit) => (
+      {sortedExhibits.map((exhibit) => (
         <button
           className="result-card"
           key={exhibit.exhibit_id}

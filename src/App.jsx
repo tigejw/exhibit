@@ -71,7 +71,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<HomePage searchProps={searchProps} exhibits={exhibits} />}
+          element={<HomePage searchProps={searchProps} exhibits={exhibits} setExhibits={setExhibits}/>}
         />
         <Route
           path="/search"
@@ -79,7 +79,7 @@ function App() {
             <SearchResultsPage results={results} searchProps={searchProps} />
           }
         />
-        <Route path="/artwork/:artworkId" element={<ArtworkViewPage searchProps={searchProps} results={results} />} />
+        <Route path="/artwork/:artworkId" element={<ArtworkViewPage searchProps={searchProps} results={results} exhibits={exhibits}/>} />
         <Route path="/exhibit/:exhibitId" element={<ExhibitViewPage searchProps={searchProps}/>} />
       </Routes>
     </Router>

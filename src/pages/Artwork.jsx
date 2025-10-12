@@ -2,10 +2,13 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import axios from "axios";
-export default function ArtworkViewPage({ searchProps }) {
+
+export default function ArtworkViewPage({ searchProps, exhibits }) {
   const { artworkId } = useParams();
   const [artwork, setArtwork] = useState(null);
   const [loading, setLoading] = useState(true);
+    const [selectedExhibit, setSelectedExhibit] = useState("");
+  const [addStatus, setAddStatus] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -21,9 +24,22 @@ export default function ArtworkViewPage({ searchProps }) {
       });
   }, [artworkId]);
 
+  const handleAddToExhibit = async () => {
+    if (!selectedExhibit) return;
+    setAddStatus("loading");
+    try {
+      await axios.post(
+        `http://localhost:9090/exhibits/${selectedExhibit}/artwork`,
+        artwork
+      );
+      setAddStatus("success");
+    } catch (err) {
+      setAddStatus("error");
+    }
+  };
+
   if (loading) return <p>Loading...</p>;
   if (!artwork) return <p>Artwork not found.</p>;
-  console.log(artwork);
   return (
     <>
       <Header searchProps={searchProps} />
@@ -36,6 +52,30 @@ export default function ArtworkViewPage({ searchProps }) {
           />
           <div className="artwork-title">{artwork.title}</div>
           <div className="artwork-artist">{artwork.artistDisplayName}</div>
+          <div className="add-to-exhibit-section">
+            <label>
+              Add to exhibit:
+              <select
+                value={selectedExhibit}
+                onChange={e => setSelectedExhibit(e.target.value)}
+              >
+                <option value="">Select exhibit</option>
+                {exhibits.map(ex => (
+                  <option key={ex.exhibit_id} value={ex.exhibit_id}>
+                    {ex.title}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <button
+              onClick={handleAddToExhibit}
+              disabled={!selectedExhibit || addStatus === "loading"}
+            >
+              Add
+            </button>
+            {addStatus === "success" && <span style={{ color: "green" }}>Added!</span>}
+            {addStatus === "error" && <span style={{ color: "red" }}>Error adding artwork.</span>}
+          </div>
         </div>
         <div className="artwork-info-section">
           <p>
