@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
-export default function SearchBar({
-  searchProps
-}) {
+export default function SearchBar({ searchProps }) {
   const navigate = useNavigate();
   const {
     query,
@@ -20,7 +18,7 @@ export default function SearchBar({
     setLimit,
     page,
     setPage,
-    onSearch
+    onSearch,
   } = searchProps;
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,16 +36,19 @@ export default function SearchBar({
     setPage(page + 1);
     onSearch();
   };
-  
+
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+    <div className="search-bar">
+      <form className="searchbar-form" onSubmit={handleSubmit}>
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="search for artworks..."
         />
+        <button type="submit">search</button>
+      </form>
+      <div className="searchbar-filters">
         <select value={source} onChange={(e) => setSource(e.target.value)}>
           <option value="">All Sources</option>
           <option value="met">The Met</option>
@@ -110,13 +111,11 @@ export default function SearchBar({
           placeholder="Limit"
           min="1"
         />
-        <button type="submit">search</button>
-      </form>
-      <button onClick={handlePrevPage} disabled={page <= 1}>
-        previous page
-      </button>
-
-      <button onClick={handleNextPage}>next page</button>
-    </>
+        <button onClick={handlePrevPage} disabled={page <= 1}>
+          previous page
+        </button>
+        <button onClick={handleNextPage}>next page</button>
+      </div>
+    </div>
   );
 }
