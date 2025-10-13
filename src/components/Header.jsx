@@ -14,9 +14,7 @@ export default function Header({ searchProps }) {
           the met x the aic
         </h1>
       </div>
-      <div className="header-center">
         <SearchBar searchProps={searchProps} />
-      </div>
     </header>
   );
 }
