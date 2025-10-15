@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 export default function ExhibitShowcase({ exhibits }) {
+
   const navigate = useNavigate();
   if (!exhibits || exhibits.length === 0) {
     return <p>No exhibits found.</p>;

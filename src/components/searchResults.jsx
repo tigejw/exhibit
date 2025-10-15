@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 
-export default function SearchResults({ results }) {
+export default function SearchResults({ results, error }) {
   const navigate = useNavigate();
 
-  if (!results.length) {
+  if (!results.length && !error) {
     return <p>No results found</p>;
   }
 

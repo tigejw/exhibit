@@ -3,7 +3,7 @@ import HomePage from "./pages/Home";
 import SearchResultsPage from "./pages/SearchResults";
 import ArtworkViewPage from "./pages/Artwork";
 import ExhibitViewPage from "./pages/Exhibit";
-import { useEffect, useState } from "react";;
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 function App() {
@@ -16,21 +16,27 @@ function App() {
   const [limit, setLimit] = useState("");
   const [page, setPage] = useState(1);
   const [results, setResults] = useState([]);
-
+  const [loading, setLoading] = useState(false);
+  const [exhibitsLoading, setExhibitsLoading] = useState(false);
+  const [error, setError] = useState("");
   const [exhibits, setExhibits] = useState([]);
 
-  useEffect(()=>{
-    axios.get("http://localhost:9090/exhibits")
-    .then((res)=>{
-      setExhibits(res.data.exhibits);
-    })
-    .catch((err)=>{
-      console.error("exhibits error:", err);
-    })
-  },[])
+  useEffect(() => {
+    setExhibitsLoading(true);
+    axios
+      .get("http://localhost:9090/exhibits")
+      .then((res) => {
+        setExhibits(res.data.exhibits);
+        setExhibitsLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message)
+        console.error("exhibits error:", err);
+      });
+  }, []);
 
-  
   const handleSearch = async () => {
+    setLoading(true);
     const params = new URLSearchParams();
     if (query) params.append("q", query);
     if (source) params.append("source", source);
@@ -41,10 +47,16 @@ function App() {
     if (limit) params.append("limit", limit);
     if (page) params.append("page", page);
     console.log(params.toString());
-    const res = await axios.get(
-      `http://localhost:9090/search?${params.toString()}`
-    );
-    setResults(res.data.artworksData);
+    try {
+      const res = await axios.get(
+        `http://localhost:9090/search?${params.toString()}`
+      );
+      setResults(res.data.artworksData);
+    } catch (err) {
+      setError(err.message)
+      console.error("Search error:", err);
+    }
+    setLoading(false);
   };
 
   const searchProps = {
@@ -71,16 +83,41 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<HomePage searchProps={searchProps} exhibits={exhibits} setExhibits={setExhibits}/>}
+          element={
+            <HomePage
+              searchProps={searchProps}
+              exhibits={exhibits}
+              setExhibits={setExhibits}
+              exhibitsLoading={exhibitsLoading}
+               error={error}
+            />
+          }
         />
         <Route
           path="/search"
           element={
-            <SearchResultsPage results={results} searchProps={searchProps} />
+            <SearchResultsPage
+              results={results}
+              searchProps={searchProps}
+              loading={loading}
+              error={error}
+            />
           }
         />
-        <Route path="/artwork/:artworkId" element={<ArtworkViewPage searchProps={searchProps} results={results} exhibits={exhibits}/>} />
-        <Route path="/exhibit/:exhibitId" element={<ExhibitViewPage searchProps={searchProps}/>} />
+        <Route
+          path="/artwork/:artworkId"
+          element={
+            <ArtworkViewPage
+              searchProps={searchProps}
+              results={results}
+              exhibits={exhibits}
+            />
+          }
+        />
+        <Route
+          path="/exhibit/:exhibitId"
+          element={<ExhibitViewPage searchProps={searchProps} />}
+        />
       </Routes>
     </Router>
   );

@@ -9,6 +9,7 @@ export default function ArtworkViewPage({ searchProps, exhibits }) {
   const [loading, setLoading] = useState(true);
     const [selectedExhibit, setSelectedExhibit] = useState("");
   const [addStatus, setAddStatus] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -18,9 +19,10 @@ export default function ArtworkViewPage({ searchProps, exhibits }) {
         setArtwork(res.data.artwork);
         setLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
         setArtwork(null);
         setLoading(false);
+        setError(err.message);
       });
   }, [artworkId]);
 
@@ -34,15 +36,16 @@ export default function ArtworkViewPage({ searchProps, exhibits }) {
       );
       setAddStatus("success");
     } catch (err) {
-      setAddStatus("error");
+      setAddStatus("error: " + err.message);
+
     }
   };
 
   if (loading) return <p>Loading...</p>;
-  if (!artwork) return <p>Artwork not found.</p>;
   return (
     <>
       <Header searchProps={searchProps} />
+      {error ? <p className="error">{error}, try again later?</p> : !artwork ? <p>Artwork not found.</p> :
       <div className="artwork-view-container">
         <div className="artwork-image-section">
           <img
@@ -106,8 +109,11 @@ export default function ArtworkViewPage({ searchProps, exhibits }) {
           <p>
             <strong>On View:</strong> {artwork.isOnView ? "Yes" : "No"}
           </p>
+          <p>
+            <strong>More Info:</strong> <a href={artwork.url} target="_blank" rel="noopener noreferrer">{artwork.url}</a>
+          </p>
         </div>
-      </div>
+      </div>}
     </>
   );
 }

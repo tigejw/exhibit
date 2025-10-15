@@ -3,17 +3,17 @@ import ExhibitShowcase from "../components/ExhibitsShowcase";
 import { useState } from "react";
 import axios from "axios";
 
-export default function HomePage({ searchProps, exhibits, setExhibits }) {
+export default function HomePage({ searchProps, exhibits, setExhibits, exhibitsLoading, error }) {
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [error, setError] = useState("");
+  const [formError, setformError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleCreateExhibit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
+    setformError("");
     try {
       const res = await axios.post("http://localhost:9090/exhibits", {
         title,
@@ -24,7 +24,7 @@ export default function HomePage({ searchProps, exhibits, setExhibits }) {
       setTitle("");
       setDescription("");
     } catch (err) {
-      setError("Failed to create exhibit.");
+      setformError("Failed to create exhibit.");
     }
     setLoading(false);
   };
@@ -65,7 +65,7 @@ export default function HomePage({ searchProps, exhibits, setExhibits }) {
                   required
                 />
               </label>
-              {error && <div className="form-error">{error}</div>}
+              {formError && <div className="form-formError">{formError}</div>}
               <div className="form-actions">
                 <button type="submit" disabled={loading}>
                   {loading ? "Creating..." : "Create"}
@@ -76,8 +76,12 @@ export default function HomePage({ searchProps, exhibits, setExhibits }) {
               </div>
             </form>
           </div>
-        ): null}
-        <ExhibitShowcase exhibits={exhibits} />
+        ) : null}
+           {error ? <p className="error">{error}, try again later?</p> : exhibitsLoading ? (
+          <div className="loading-indicator">Loading exhibits...</div>
+        ) : (
+          <ExhibitShowcase exhibits={exhibits} />
+        )}
       </main>
     </div>
   );
