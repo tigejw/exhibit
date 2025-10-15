@@ -15,7 +15,7 @@ export default function HomePage({ searchProps, exhibits, setExhibits, exhibitsL
     setLoading(true);
     setformError("");
     try {
-      const res = await axios.post("http://localhost:9090/exhibits", {
+      const res = await axios.post("https://exhibit-mw48.onrender.com/exhibits", {
         title,
         description,
       });

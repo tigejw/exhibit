@@ -14,7 +14,7 @@ export default function ArtworkViewPage({ searchProps, exhibits }) {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:9090/artwork/${artworkId}`)
+      .get(`https://exhibit-mw48.onrender.com/artwork/${artworkId}`)
       .then((res) => {
         setArtwork(res.data.artwork);
         setLoading(false);
@@ -31,7 +31,7 @@ export default function ArtworkViewPage({ searchProps, exhibits }) {
     setAddStatus("loading");
     try {
       await axios.post(
-        `http://localhost:9090/exhibits/${selectedExhibit}/artwork`,
+        `https://exhibit-mw48.onrender.com/exhibits/${selectedExhibit}/artwork`,
         artwork
       );
       setAddStatus("success");
