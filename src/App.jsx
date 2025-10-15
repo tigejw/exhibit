@@ -24,7 +24,7 @@ function App() {
   useEffect(() => {
     setExhibitsLoading(true);
     axios
-      .get("http://localhost:9090/exhibits")
+      .get("https://exhibit-mw48.onrender.com/exhibits")
       .then((res) => {
         setExhibits(res.data.exhibits);
         setExhibitsLoading(false);
@@ -49,7 +49,7 @@ function App() {
     console.log(params.toString());
     try {
       const res = await axios.get(
-        `http://localhost:9090/search?${params.toString()}`
+        `https://exhibit-mw48.onrender.com/search?${params.toString()}`
       );
       setResults(res.data.artworksData);
     } catch (err) {

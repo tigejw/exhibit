@@ -13,7 +13,7 @@ export default function ExhibitViewPage({ searchProps }) {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:9090/exhibits/${exhibitId}`)
+      .get(`https://exhibit-mw48.onrender.com/exhibits/${exhibitId}`)
       .then((res) => {
         setExhibit(res.data.exhibit);
         setLoading(false);
