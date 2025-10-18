@@ -4,8 +4,8 @@ A web application for browsing and curating art exhibits from the Metropolitan M
 
 # Hosted Websites
 
-Frontend: https://exhibitmetxaic.netlify.app/
-Backend: https://exhibit-mw48.onrender.com/
+- Frontend: https://exhibitmetxaic.netlify.app/
+- Backend: https://exhibit-mw48.onrender.com/
 
 # Features
 - Browse artworks from museum collections
