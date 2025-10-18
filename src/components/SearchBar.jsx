@@ -47,6 +47,7 @@ export default function SearchBar({ searchProps }) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="search for artworks..."
+              aria-label="search-bar"
             />
             <button type="submit">search</button>
           </form>
@@ -54,6 +55,7 @@ export default function SearchBar({ searchProps }) {
             <div className="searchfilters-container">
               <div className="searchbar-filters">
                 <select
+                  aria-label="search-bar-filters-source"
                   value={source}
                   onChange={(e) => setSource(e.target.value)}
                 >
@@ -62,6 +64,7 @@ export default function SearchBar({ searchProps }) {
                   <option value="chicago">Art Institute of Chicago</option>
                 </select>
                 <select
+                  aria-label="search-bar-filters-department"
                   value={department}
                   onChange={(e) => setDepartment(e.target.value)}
                 >
@@ -109,6 +112,7 @@ export default function SearchBar({ searchProps }) {
                   <option value="Textiles">Textiles</option>
                 </select>
                 <select
+                  aria-label="search-bar-filters-sortby"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
                 >
@@ -118,6 +122,7 @@ export default function SearchBar({ searchProps }) {
                   <option value="artistDisplayName">artist</option>
                 </select>
                 <select
+                  aria-label="search-bar-filters-order"
                   value={order}
                   onChange={(e) => setOrder(e.target.value)}
                 >
@@ -131,6 +136,7 @@ export default function SearchBar({ searchProps }) {
                   onChange={(e) => setLimit(e.target.value)}
                   placeholder="Limit"
                   min="1"
+                  aria-label="search-bar-limit"
                 />
                 {/* <button onClick={handlePrevPage} disabled={page <= 1}>
               previous page

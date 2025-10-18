@@ -20,7 +20,7 @@ export default function ExhibitShowcase({ exhibits }) {
           type="button"
         >
           <div className="result-image-container">
-            <img src={exhibit.thumbnail} alt={exhibit.title} />
+            <img src={exhibit.thumbnail} alt={`${exhibit.title} thumbnail`} />
           </div>
           <div className="result-title">{exhibit.title}</div>
           <div className="result-artist">{exhibit.description}</div>
