@@ -1,6 +1,6 @@
 # Exhibit: the MET x the AIC
 
-A web application for browsing and curranting art exhibits from the Metropolitan Museum of Art and The Art Institute of Chicago's APIs. 
+A web application for browsing and curating art exhibits from the Metropolitan Museum of Art and The Art Institute of Chicago's APIs. 
 
 # Hosted Websites
 
