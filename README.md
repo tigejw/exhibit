@@ -1,69 +1,48 @@
-# React + TypeScript + Vite
+# Exhibit: the MET x the AIC
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application for browsing and curranting art exhibits from the Metropolitan Museum of Art and The Art Institute of Chicago's APIs. 
 
-Currently, two official plugins are available:
+# Hosted Websites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Frontend: https://exhibitmetxaic.netlify.app/
+Backend: https://exhibit-mw48.onrender.com/
 
-## Expanding the ESLint configuration
+# Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+-React
+-Javascript
+-CSS
+-Vite
+-Axios
+-HTML 
+-Node.js
+-Express.js
+-PostgreSQL
+-External APIs (Metropolitan Museum of Art and The Art Institute of Chicago)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+# Run it Locally
+  
+  # Frontend 
+- Clone the frontend repo with 'git clone https://github.com/tigejw/exhibit.git'
+- Install dependencies with 'npm install'
+- Start development server with 'npm run dev'
+- Open the localhost:xxxx link in your browser.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+  # Backend 
+- Clone the backend repo with 'git clone https://github.com/tigejw/exhibit-be.git'
+- Install dependencies with 'npm install'
+- Set up your environment variables in `.env.development`: PGDATABASE = your_database_name
+- Set up and seed the database with 'npm run setup-dbs' 'npm run seed'
+- Start the server with 'npm run dev'
+- The API will be available at http://localhost:9090
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+-- 
+Be aware that if you want to run the local front and backend together, you will need to change the API URLs in the front end from 'https://exhibit-mw48.onrender.com/' to 'http://localhost:9090' 
+--
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+# Features
+- Browse artworks from museum collections
+- Search and filter by various criteria
+- Create and add artworks to personal exhibits
+- Exhibits are stored + saved.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
