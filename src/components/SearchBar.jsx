@@ -51,10 +51,18 @@ export default function SearchBar({ searchProps }) {
             />
             <button type="submit">search</button>
           </form>
-      
-            <div className="searchfilters-container">
-              <div className="searchbar-filters">
+
+          <div className="searchfilters-container">
+            <div className="searchbar-filters">
+              <div className="filter-item">
+                <label
+                  htmlFor="search-bar-filters-source"
+                  className="filter-label"
+                >
+                  Source
+                </label>
                 <select
+                  id="search-bar-filters-source"
                   aria-label="search-bar-filters-source"
                   value={source}
                   onChange={(e) => setSource(e.target.value)}
@@ -63,7 +71,17 @@ export default function SearchBar({ searchProps }) {
                   <option value="met">The Met</option>
                   <option value="chicago">Art Institute of Chicago</option>
                 </select>
+              </div>
+
+              <div className="filter-item">
+                <label
+                  htmlFor="search-bar-filters-department"
+                  className="filter-label"
+                >
+                  Department
+                </label>
                 <select
+                  id="search-bar-filters-department"
                   aria-label="search-bar-filters-department"
                   value={department}
                   onChange={(e) => setDepartment(e.target.value)}
@@ -111,7 +129,17 @@ export default function SearchBar({ searchProps }) {
                   <option value="Research Center">Research Center</option>
                   <option value="Textiles">Textiles</option>
                 </select>
+              </div>
+
+              <div className="filter-item">
+                <label
+                  htmlFor="search-bar-filters-sortby"
+                  className="filter-label"
+                >
+                  Sort
+                </label>
                 <select
+                  id="search-bar-filters-sortby"
                   aria-label="search-bar-filters-sortby"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
@@ -121,7 +149,17 @@ export default function SearchBar({ searchProps }) {
                   <option value="medium">medium</option>
                   <option value="artistDisplayName">artist</option>
                 </select>
+              </div>
+
+              <div className="filter-item">
+                <label
+                  htmlFor="search-bar-filters-order"
+                  className="filter-label"
+                >
+                  Order
+                </label>
                 <select
+                  id="search-bar-filters-order"
                   aria-label="search-bar-filters-order"
                   value={order}
                   onChange={(e) => setOrder(e.target.value)}
@@ -130,7 +168,14 @@ export default function SearchBar({ searchProps }) {
                   <option value="asc">asc</option>
                   <option value="desc">desc</option>
                 </select>
+              </div>
+
+              <div className="filter-item">
+                <label htmlFor="search-bar-limit" className="filter-label">
+                  Limit
+                </label>
                 <input
+                  id="search-bar-limit"
                   type="number"
                   value={limit}
                   onChange={(e) => setLimit(e.target.value)}
@@ -138,12 +183,12 @@ export default function SearchBar({ searchProps }) {
                   min="1"
                   aria-label="search-bar-limit"
                 />
-                {/* <button onClick={handlePrevPage} disabled={page <= 1}>
+              </div>
+              {/* <button onClick={handlePrevPage} disabled={page <= 1}>
               previous page
               </button>
               <button onClick={handleNextPage}>next page</button>*/}
-              </div>
-          
+            </div>
           </div>
         </div>
       </div>

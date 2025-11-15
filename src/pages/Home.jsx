@@ -19,68 +19,51 @@ export default function HomePage({ searchProps, exhibits, setExhibits, exhibitsL
         title,
         description,
       });
-      setExhibits([...exhibits, res.data.exhibit]);
+      setExhibits((prev = []) => [...prev, res.data.exhibit]);
       setShowForm(false);
       setTitle("");
       setDescription("");
     } catch (err) {
       setformError("Failed to create exhibit.");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
-
   return (
-    <div>
+    <div className="home-container">
       <Header searchProps={searchProps} />
       <main>
         <div className="exhibits-header-row">
           <h2 className="section-title">Exhibits</h2>
           <button
             className="create-exhibit-btn"
-            onClick={() => setShowForm(true)}
+            onClick={() => setShowForm((s) => !s)}
+            disabled={loading}
+            type="button"
+
+            data-create-toggle="1"
           >
-            + Create New Exhibit
+            {showForm ? "Close" : "+ Create New Exhibit"}
           </button>
         </div>
-        {showForm ? (
-          <div className="modal-overlay">
-            <form
-              className="create-exhibit-form"
-              onSubmit={handleCreateExhibit}
-            >
-              <h3>Create New Exhibit</h3>
-              <label>
-                Title:
-                <input
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Description:
-                <textarea
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  required
-                />
-              </label>
-              {formError && <div className="form-formError">{formError}</div>}
-              <div className="form-actions">
-                <button type="submit" disabled={loading}>
-                  {loading ? "Creating..." : "Create"}
-                </button>
-                <button type="button" onClick={() => setShowForm(false)}>
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        ) : null}
-           {error ? <p className="error">{error}, try again later?</p> : exhibitsLoading ? (
+        
+        {error ? (
+          <p className="error">{error}, try again later?</p>
+        ) : exhibitsLoading ? (
           <div className="loading-indicator">Loading exhibits...</div>
         ) : (
-          <ExhibitShowcase exhibits={exhibits} />
+          <ExhibitShowcase
+            exhibits={exhibits}
+            showForm={showForm}
+            setShowForm={setShowForm}
+            title={title}
+            setTitle={setTitle}
+            description={description}
+            setDescription={setDescription}
+            handleCreateExhibit={handleCreateExhibit}
+            formError={formError}
+            loading={loading}
+          />
         )}
       </main>
     </div>
