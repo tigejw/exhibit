@@ -4,5 +4,6 @@
 @import "./css/header.css";
 
 body {
+  background-color:  #ffe3e3;
   margin: 0;
 }

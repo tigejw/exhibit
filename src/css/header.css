@@ -4,8 +4,7 @@
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
   align-items: center;
-   background: linear-gradient(180deg, #ffbdbd 0%, #ffffff 100%);
-  border-bottom: 1px solid #eee;
+   background: linear-gradient(180deg, #ffafaf 0%, #ffe3e3 100%);
   /* padding: clamp(0.5rem, 1vw, 1.2rem); */
 }
 

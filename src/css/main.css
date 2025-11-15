@@ -1,18 +1,19 @@
 /* main */
+
 .section-title {
   font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  margin: 50px;
+  margin: 20px 50px;
 }
 /*results and grid*/
 
 .results-grid-container {
-    margin-top: 50px;
+  margin-top: 50px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  padding: 0 50px
+  padding: 0 50px;
 }
 
 @media (max-width: 900px) {
@@ -35,20 +36,18 @@
   padding: 1rem;
   background: linear-gradient(180deg, #ffffff 0%, #ffeded 100%);
   max-width: 100%;
-  
 }
 .result-card:hover,
 .result-card:focus-visible {
   transform: translateY(-6px);
-  box-shadow: 0 14px 40px rgba(17, 17, 17, 0.10);
+  box-shadow: 0 14px 40px rgba(17, 17, 17, 0.1);
 }
 .result-image-container {
-
   width: 100%;
   aspect-ratio: 4/3;
   background: #e5e5e5;
   border-radius: 8px;
-  height:fit-content
+  height: fit-content;
 }
 
 .result-card img {
